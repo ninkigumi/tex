@@ -25,8 +25,7 @@ RUN apt update && \
 
 # Install TeX Live
 RUN mkdir install-tl-unx && \
-    #wget -qO- http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz | \
-    wget -qO- http://ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz | \
+    wget -qO- http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz | \
       tar -xz -C ./install-tl-unx --strip-components=1 && \
     printf "%s\n" \
       "TEXDIR ${TL_PATH}" \
