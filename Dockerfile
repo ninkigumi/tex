@@ -25,7 +25,8 @@ RUN apt update && \
 
 # Install TeX Live
 RUN mkdir install-tl-unx && \
-    wget -qO- http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz | \
+    #wget -qO- http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz | \
+    wget -qO- http://ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz | \
       tar -xz -C ./install-tl-unx --strip-components=1 && \
     printf "%s\n" \
       "TEXDIR ${TL_PATH}" \
@@ -43,7 +44,7 @@ RUN \
       cjk-gs-integrate --cleanup --force && \
       cjk-gs-integrate --force && \
     # Copy CMap: 2004-{H,V}
-      #cp ${TL_PATH}/texmf-dist/fonts/cmap/ptex-fontmaps/2004-* /var/lib/ghostscript/CMap/ && \
+    # cp ${TL_PATH}/texmf-dist/fonts/cmap/ptex-fontmaps/2004-* /var/lib/ghostscript/CMap/ && \
       kanji-config-updmap-sys --jis2004 haranoaji && \
     # Re-index LuaTeX font database
       luaotfload-tool -u -f && \
