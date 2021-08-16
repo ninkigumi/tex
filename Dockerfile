@@ -35,7 +35,8 @@ RUN mkdir install-tl-unx && \
       > ./install-tl-unx/texlive.profile && \
     ./install-tl-unx/install-tl \
       -profile ./install-tl-unx/texlive.profile \
-      -repository http://ftp.jaist.ac.jp/pub/CTAN/systems/texlive/tlnet/ && \
+      #-repository http://ftp.jaist.ac.jp/pub/CTAN/systems/texlive/tlnet/ && \
+      -repository https://ctan.math.washington.edu/tex-archive/systems/texlive/tlnet/ && \
     rm -rf *
 
 # Set up fonts and llmk
