@@ -11,6 +11,7 @@ WORKDIR /tmp
 # Install required packages
 RUN apt update && \
     apt upgrade -y && \
+    apt install -y apt-utils && \
     apt install -y \
     # Basic tools
     wget unzip ghostscript \
