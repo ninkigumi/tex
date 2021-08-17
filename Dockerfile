@@ -58,3 +58,4 @@ VOLUME ["/usr/local/texlive/${TL_VERSION}/texmf-var/luatex-cache"]
 WORKDIR /workdir
 
 CMD ["sh"]
+
