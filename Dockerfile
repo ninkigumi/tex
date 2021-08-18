@@ -53,6 +53,19 @@ RUN \
       wget -q -O /usr/local/bin/llmk https://raw.githubusercontent.com/wtsnjp/llmk/master/llmk.lua && \
       chmod +x /usr/local/bin/llmk
 
+RUN mkdir -p /System/Library/Fonts \
+ && touch '/System/Library/Fonts/ヒラギノ明朝 ProN.ttc' \
+ && touch '/System/Library/Fonts/ヒラギノ丸ゴ ProN W4.ttc' \
+ && touch '/System/Library/Fonts/ヒラギノ角ゴシック W0.ttc' \
+ && touch '/System/Library/Fonts/ヒラギノ角ゴシック W1.ttc' \
+ && touch '/System/Library/Fonts/ヒラギノ角ゴシック W2.ttc' \
+ && touch '/System/Library/Fonts/ヒラギノ角ゴシック W3.ttc' \
+ && touch '/System/Library/Fonts/ヒラギノ角ゴシック W4.ttc' \
+ && touch '/System/Library/Fonts/ヒラギノ角ゴシック W5.ttc' \
+ && touch '/System/Library/Fonts/ヒラギノ角ゴシック W6.ttc' \
+ && touch '/System/Library/Fonts/ヒラギノ角ゴシック W7.ttc' \
+ && touch '/System/Library/Fonts/ヒラギノ角ゴシック W8.ttc' \
+ && touch '/System/Library/Fonts/ヒラギノ角ゴシック W9.ttc'
 
 RUN tlmgr repository add http://contrib.texlive.info/current tlcontrib
 RUN tlmgr pinning add tlcontrib '*'
@@ -66,7 +79,7 @@ RUN kanji-config-updmap-sys --jis2004 hiragino-highsierra-pron
 RUN luaotfload-tool -u -f
 RUN fc-cache -r
 
-
+RUN rm -f /System/Library/Fonts/*.ttc
 
 VOLUME ["/usr/local/texlive/${TL_VERSION}/texmf-var/luatex-cache"]
 
