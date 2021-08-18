@@ -53,6 +53,21 @@ RUN \
       wget -q -O /usr/local/bin/llmk https://raw.githubusercontent.com/wtsnjp/llmk/master/llmk.lua && \
       chmod +x /usr/local/bin/llmk
 
+
+RUN tlmgr repository add http://contrib.texlive.info/current tlcontrib
+RUN tlmgr pinning add tlcontrib '*'
+RUN tlmgr install \
+   japanese-otf-nonfree \
+   japanese-otf-uptex-nonfree \
+   ptex-fontmaps-macos \
+   cjk-gs-integrate-macos
+RUN cjk-gs-integrate --link-texmf --force
+RUN kanji-config-updmap-sys --jis2004 hiragino-highsierra-pron
+RUN luaotfload-tool -u -f
+RUN fc-cache -r
+
+
+
 VOLUME ["/usr/local/texlive/${TL_VERSION}/texmf-var/luatex-cache"]
 
 WORKDIR /workdir
