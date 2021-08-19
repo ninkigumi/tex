@@ -74,10 +74,11 @@ RUN tlmgr install \
    japanese-otf-uptex-nonfree \
    ptex-fontmaps-macos \
    cjk-gs-integrate-macos
-RUN cjk-gs-integrate --link-texmf --force
+RUN cjk-gs-integrate --link-texmf --force \
+  --fontdef-add=$(kpsewhich -var-value=TEXMFDIST)/fonts/misc/cjk-gs-integrate-macos/cjkgs-macos-highsierra.dat
 RUN kanji-config-updmap-sys --jis2004 hiragino-highsierra-pron
 RUN luaotfload-tool -u -f
-RUN fc-cache -r
+#RUN fc-cache -r
 
 RUN rm -f /System/Library/Fonts/*.ttc
 
