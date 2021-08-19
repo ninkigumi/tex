@@ -39,33 +39,18 @@ RUN mkdir install-tl-unx && \
       -repository https://ctan.math.washington.edu/tex-archive/systems/texlive/tlnet/ && \
     rm -rf *
 
-# Set up fonts and llmk
+# Set up Japanese fonts
+RUN tlmgr install \
+      collection-latexextra \
+      collection-fontsrecommended \
+      collection-langjapanese \
+      latexmk
+
+# Set up llmk
 RUN \
-    # Run cjk-gs-integrate
-      cjk-gs-integrate --cleanup --force && \
-      cjk-gs-integrate --force && \
-    # Copy CMap: 2004-{H,V}
-    # cp ${TL_PATH}/texmf-dist/fonts/cmap/ptex-fontmaps/2004-* /var/lib/ghostscript/CMap/ && \
-      kanji-config-updmap-sys --jis2004 haranoaji && \
-    # Re-index LuaTeX font database
-      luaotfload-tool -u -f && \
     # Install llmk
       wget -q -O /usr/local/bin/llmk https://raw.githubusercontent.com/wtsnjp/llmk/master/llmk.lua && \
       chmod +x /usr/local/bin/llmk
-
-RUN mkdir -p /System/Library/Fonts \
- && touch '/System/Library/Fonts/ヒラギノ明朝 ProN.ttc' \
- && touch '/System/Library/Fonts/ヒラギノ丸ゴ ProN W4.ttc' \
- && touch '/System/Library/Fonts/ヒラギノ角ゴシック W0.ttc' \
- && touch '/System/Library/Fonts/ヒラギノ角ゴシック W1.ttc' \
- && touch '/System/Library/Fonts/ヒラギノ角ゴシック W2.ttc' \
- && touch '/System/Library/Fonts/ヒラギノ角ゴシック W3.ttc' \
- && touch '/System/Library/Fonts/ヒラギノ角ゴシック W4.ttc' \
- && touch '/System/Library/Fonts/ヒラギノ角ゴシック W5.ttc' \
- && touch '/System/Library/Fonts/ヒラギノ角ゴシック W6.ttc' \
- && touch '/System/Library/Fonts/ヒラギノ角ゴシック W7.ttc' \
- && touch '/System/Library/Fonts/ヒラギノ角ゴシック W8.ttc' \
- && touch '/System/Library/Fonts/ヒラギノ角ゴシック W9.ttc'
 
 RUN tlmgr repository add http://contrib.texlive.info/current tlcontrib
 RUN tlmgr pinning add tlcontrib '*'
@@ -78,14 +63,39 @@ RUN cjk-gs-integrate --link-texmf --force \
   --fontdef-add=$(kpsewhich -var-value=TEXMFDIST)/fonts/misc/cjk-gs-integrate-macos/cjkgs-macos-highsierra.dat
 RUN kanji-config-updmap-sys --jis2004 hiragino-highsierra-pron
 RUN luaotfload-tool -u -f
-#RUN fc-cache -r
+RUN fc-cache -r
 RUN kanji-config-updmap-sys status
 
-RUN rm -f /System/Library/Fonts/*.ttc
+# Set default LANG=ja_JP.UTF-8. Without locale settings hiragino fonts cannot be found. Its file name is Japanese.
+RUN apt-get update && \
+    apt-get install -y locales && \
+    # Clean caches
+    apt-get autoremove -y && \
+    apt-get clean
+RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
+    echo "ja_JP.UTF-8 UTF-8" >> /etc/locale.gen && \
+    locale-gen && \
+    /usr/sbin/update-locale LANG=ja_JP.UTF-8
+ENV lang=ja_JP.UTF-8
+
+# Set up hiragino fonts link.
+WORKDIR /usr/share/fonts/SystemLibraryFonts
+RUN ln -s /usr/share/fonts/SystemLibraryFonts/"ヒラギノ明朝 ProN.ttc" /usr/local/texlive/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSerif.ttc
+RUN ln -s /usr/share/fonts/SystemLibraryFonts/"ヒラギノ丸ゴ ProN W4.ttc" /usr/local/texlive/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSansR-W4.ttc
+RUN ln -s /usr/share/fonts/SystemLibraryFonts/"ヒラギノ角ゴシック W0.ttc" /usr/local/texlive/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSans-W0.ttc
+RUN ln -s /usr/share/fonts/SystemLibraryFonts/"ヒラギノ角ゴシック W1.ttc" /usr/local/texlive/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSans-W1.ttc
+RUN ln -s /usr/share/fonts/SystemLibraryFonts/"ヒラギノ角ゴシック W2.ttc" /usr/local/texlive/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSans-W2.ttc
+RUN ln -s /usr/share/fonts/SystemLibraryFonts/"ヒラギノ角ゴシック W3.ttc" /usr/local/texlive/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSans-W3.ttc
+RUN ln -s /usr/share/fonts/SystemLibraryFonts/"ヒラギノ角ゴシック W4.ttc" /usr/local/texlive/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSans-W4.ttc
+RUN ln -s /usr/share/fonts/SystemLibraryFonts/"ヒラギノ角ゴシック W5.ttc" /usr/local/texlive/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSans-W5.ttc
+RUN ln -s /usr/share/fonts/SystemLibraryFonts/"ヒラギノ角ゴシック W6.ttc" /usr/local/texlive/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSans-W6.ttc
+RUN ln -s /usr/share/fonts/SystemLibraryFonts/"ヒラギノ角ゴシック W7.ttc" /usr/local/texlive/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSans-W7.ttc
+RUN ln -s /usr/share/fonts/SystemLibraryFonts/"ヒラギノ角ゴシック W8.ttc" /usr/local/texlive/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSans-W8.ttc
+RUN ln -s /usr/share/fonts/SystemLibraryFonts/"ヒラギノ角ゴシック W9.ttc" /usr/local/texlive/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSans-W9.ttc
+RUN mktexlsr
 
 VOLUME ["/usr/local/texlive/${TL_VERSION}/texmf-var/luatex-cache"]
 
 WORKDIR /workdir
 
-CMD ["sh"]
-
+CMD ["bash"]
