@@ -79,6 +79,7 @@ RUN cjk-gs-integrate --link-texmf --force \
 RUN kanji-config-updmap-sys --jis2004 hiragino-highsierra-pron
 RUN luaotfload-tool -u -f
 #RUN fc-cache -r
+RUN kanji-config-updmap-sys status
 
 RUN rm -f /System/Library/Fonts/*.ttc
 
