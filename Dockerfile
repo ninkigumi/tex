@@ -67,6 +67,21 @@ RUN mkdir -p /System/Library/Fonts \
  && touch '/System/Library/Fonts/ヒラギノ角ゴシック W8.ttc' \
  && touch '/System/Library/Fonts/ヒラギノ角ゴシック W9.ttc'
 
+RUN mkdir -p /usr/share/fonts/SystemLibraryFonts \
+ && touch '/usr/share/fonts/SystemLibraryFonts/ヒラギノ明朝 ProN.ttc' \
+ && touch '/usr/share/fonts/SystemLibraryFonts/ヒラギノ丸ゴ ProN W4.ttc' \
+ && touch '/usr/share/fonts/SystemLibraryFonts/ヒラギノ角ゴシック W0.ttc' \
+ && touch '/usr/share/fonts/SystemLibraryFonts/ヒラギノ角ゴシック W1.ttc' \
+ && touch '/usr/share/fonts/SystemLibraryFonts/ヒラギノ角ゴシック W2.ttc' \
+ && touch '/usr/share/fonts/SystemLibraryFonts/ヒラギノ角ゴシック W3.ttc' \
+ && touch '/usr/share/fonts/SystemLibraryFonts/ヒラギノ角ゴシック W4.ttc' \
+ && touch '/usr/share/fonts/SystemLibraryFonts/ヒラギノ角ゴシック W5.ttc' \
+ && touch '/usr/share/fonts/SystemLibraryFonts/ヒラギノ角ゴシック W6.ttc' \
+ && touch '/usr/share/fonts/SystemLibraryFonts/ヒラギノ角ゴシック W7.ttc' \
+ && touch '/usr/share/fonts/SystemLibraryFonts/ヒラギノ角ゴシック W8.ttc' \
+ && touch '/usr/share/fonts/SystemLibraryFonts/ヒラギノ角ゴシック W9.ttc'
+
+
 RUN tlmgr repository add http://contrib.texlive.info/current tlcontrib
 RUN tlmgr pinning add tlcontrib '*'
 RUN tlmgr install \
