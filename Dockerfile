@@ -13,7 +13,7 @@ RUN apt update && \
     apt upgrade -y && \
     apt install -y \
     # Basic tools
-    wget unzip ghostscript \
+    wget unzip ghostscript locales \
     # for tlmgr
     perl-modules-5.32 \
     # for XeTeX
@@ -21,7 +21,12 @@ RUN apt update && \
     # Clean caches
     apt autoremove -y && \
     apt clean && \
-    rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
+    rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/* && \
+# Set default LANG=ja_JP.UTF-8. Without locale settings hiragino fonts cannot be found. Its file name is Japanese.
+    echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
+    echo "ja_JP.UTF-8 UTF-8" >> /etc/locale.gen && \
+    locale-gen && \
+    /usr/sbin/update-locale LANG=ja_JP.UTF-8
 
 # Install TeX Live
 RUN mkdir install-tl-unx && \
@@ -59,17 +64,6 @@ RUN tlmgr repository add http://contrib.texlive.info/current tlcontrib && \
     kanji-config-updmap-sys status && \
     wget -q -O /usr/local/bin/llmk https://raw.githubusercontent.com/wtsnjp/llmk/master/llmk.lua && \
     chmod +x /usr/local/bin/llmk
-
-# Set default LANG=ja_JP.UTF-8. Without locale settings hiragino fonts cannot be found. Its file name is Japanese.
-RUN apt-get install -y locales && \
-    # Clean caches
-    apt-get autoremove -y && \
-    apt-get clean && \
-    echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
-    echo "ja_JP.UTF-8 UTF-8" >> /etc/locale.gen && \
-    locale-gen && \
-    /usr/sbin/update-locale LANG=ja_JP.UTF-8
-ENV lang=ja_JP.UTF-8
 
 # Set up hiragino fonts link.
 WORKDIR /usr/share/fonts/SystemLibraryFonts
