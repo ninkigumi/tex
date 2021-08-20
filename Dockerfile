@@ -46,7 +46,6 @@ RUN tlmgr repository add http://contrib.texlive.info/current tlcontrib && \
       collection-latexextra \
       collection-fontsrecommended \
       collection-langjapanese \
-      latexmk \
       japanese-otf-nonfree \
       japanese-otf-uptex-nonfree \
       ptex-fontmaps-macos \
@@ -57,10 +56,13 @@ RUN tlmgr repository add http://contrib.texlive.info/current tlcontrib && \
     luaotfload-tool -u -f && \
     fc-cache -r && \
     kanji-config-updmap-sys status && \
+    # Set up latexmk and llmk
+    tlmgr install \
+      latexmk && \
     wget -q -O /usr/local/bin/llmk https://raw.githubusercontent.com/wtsnjp/llmk/master/llmk.lua && \
     chmod +x /usr/local/bin/llmk
 
-# Set up hiragino fonts link.
+# Set up hiragino and mac fonts link.
 RUN ln -s /usr/share/fonts/SystemLibraryFonts/"ヒラギノ明朝 ProN.ttc" /usr/local/texlive/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSerif.ttc && \
     ln -s /usr/share/fonts/SystemLibraryFonts/"ヒラギノ丸ゴ ProN W4.ttc" /usr/local/texlive/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSansR-W4.ttc && \
     ln -s /usr/share/fonts/SystemLibraryFonts/"ヒラギノ角ゴシック W0.ttc" /usr/local/texlive/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSans-W0.ttc && \
