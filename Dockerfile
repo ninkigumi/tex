@@ -73,18 +73,18 @@ ENV lang=ja_JP.UTF-8
 
 # Set up hiragino fonts link.
 WORKDIR /usr/share/fonts/SystemLibraryFonts
-RUN ln -s "ヒラギノ明朝 ProN.ttc" /usr/local/texlive/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSerif.ttc && \
-    ln -s "ヒラギノ丸ゴ ProN W4.ttc" /usr/local/texlive/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSansR-W4.ttc && \
-    ln -s "ヒラギノ角ゴシック W0.ttc" /usr/local/texlive/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSans-W0.ttc && \
-    ln -s "ヒラギノ角ゴシック W1.ttc" /usr/local/texlive/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSans-W1.ttc && \
-    ln -s "ヒラギノ角ゴシック W2.ttc" /usr/local/texlive/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSans-W2.ttc && \
-    ln -s "ヒラギノ角ゴシック W3.ttc" /usr/local/texlive/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSans-W3.ttc && \
-    ln -s "ヒラギノ角ゴシック W4.ttc" /usr/local/texlive/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSans-W4.ttc && \
-    ln -s "ヒラギノ角ゴシック W5.ttc" /usr/local/texlive/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSans-W5.ttc && \
-    ln -s "ヒラギノ角ゴシック W6.ttc" /usr/local/texlive/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSans-W6.ttc && \
-    ln -s "ヒラギノ角ゴシック W7.ttc" /usr/local/texlive/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSans-W7.ttc && \
-    ln -s "ヒラギノ角ゴシック W8.ttc" /usr/local/texlive/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSans-W8.ttc && \
-    ln -s "ヒラギノ角ゴシック W9.ttc" /usr/local/texlive/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSans-W9.ttc && \
+RUN ln -s "ヒラギノ明朝 ProN.ttc" ${TL_PATH}/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSerif.ttc && \
+    ln -s "ヒラギノ丸ゴ ProN W4.ttc" ${TL_PATH}/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSansR-W4.ttc && \
+    ln -s "ヒラギノ角ゴシック W0.ttc" ${TL_PATH}/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSans-W0.ttc && \
+    ln -s "ヒラギノ角ゴシック W1.ttc" ${TL_PATH}/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSans-W1.ttc && \
+    ln -s "ヒラギノ角ゴシック W2.ttc" ${TL_PATH}/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSans-W2.ttc && \
+    ln -s "ヒラギノ角ゴシック W3.ttc" ${TL_PATH}/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSans-W3.ttc && \
+    ln -s "ヒラギノ角ゴシック W4.ttc" ${TL_PATH}/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSans-W4.ttc && \
+    ln -s "ヒラギノ角ゴシック W5.ttc" ${TL_PATH}/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSans-W5.ttc && \
+    ln -s "ヒラギノ角ゴシック W6.ttc" ${TL_PATH}/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSans-W6.ttc && \
+    ln -s "ヒラギノ角ゴシック W7.ttc" ${TL_PATH}/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSans-W7.ttc && \
+    ln -s "ヒラギノ角ゴシック W8.ttc" ${TL_PATH}/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSans-W8.ttc && \
+    ln -s "ヒラギノ角ゴシック W9.ttc" ${TL_PATH}/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSans-W9.ttc && \
     mktexlsr
 
 #RUN ln -s /usr/share/fonts/SystemLibraryFonts/"ヒラギノ明朝 ProN.ttc" /usr/local/texlive/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSerif.ttc
