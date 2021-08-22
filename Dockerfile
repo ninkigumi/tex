@@ -49,9 +49,9 @@ RUN tlmgr repository add http://contrib.texlive.info/current tlcontrib && \
       japanese-otf-uptex-nonfree \
       ptex-fontmaps-macos \
       cjk-gs-integrate-macos && \
+    kanji-config-updmap-sys --force --jis2004 hiragino-highsierra-pron && \
     cjk-gs-integrate --link-texmf --force \
       --fontdef-add=$(kpsewhich -var-value=TEXMFDIST)/fonts/misc/cjk-gs-integrate-macos/cjkgs-macos-highsierra.dat && \
-    kanji-config-updmap-sys --jis2004 hiragino-highsierra-pron && \
     luaotfload-tool -u -f && \
     fc-cache -r && \
     kanji-config-updmap-sys status && \
