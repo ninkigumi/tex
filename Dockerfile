@@ -52,17 +52,8 @@ RUN tlmgr repository add http://contrib.texlive.info/current tlcontrib && \
     kanji-config-updmap-sys --force --jis2004 hiragino-highsierra-pron && \
     cjk-gs-integrate --link-texmf --force \
       --fontdef-add=$(kpsewhich -var-value=TEXMFDIST)/fonts/misc/cjk-gs-integrate-macos/cjkgs-macos-highsierra.dat && \
-    luaotfload-tool -u -f && \
-    fc-cache -r && \
-    kanji-config-updmap-sys status && \
-    # Set up latexmk and llmk
-    tlmgr install \
-      latexmk && \
-    wget -q -O /usr/local/bin/llmk https://raw.githubusercontent.com/wtsnjp/llmk/master/llmk.lua && \
-    chmod +x /usr/local/bin/llmk
-
-# Set up hiragino and mac fonts link.
-RUN ln -s /usr/share/fonts/SystemLibraryFonts/"ヒラギノ明朝 ProN.ttc" /usr/local/texlive/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSerif.ttc && \
+    # Set up hiragino and the other Japanese fonts link.
+    ln -s /usr/share/fonts/SystemLibraryFonts/"ヒラギノ明朝 ProN.ttc" /usr/local/texlive/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSerif.ttc && \
     ln -s /usr/share/fonts/SystemLibraryFonts/"ヒラギノ丸ゴ ProN W4.ttc" /usr/local/texlive/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSansR-W4.ttc && \
     ln -s /usr/share/fonts/SystemLibraryFonts/"ヒラギノ角ゴシック W0.ttc" /usr/local/texlive/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSans-W0.ttc && \
     ln -s /usr/share/fonts/SystemLibraryFonts/"ヒラギノ角ゴシック W1.ttc" /usr/local/texlive/texmf-local/fonts/opentype/cjk-gs-integrate/HiraginoSans-W1.ttc && \
@@ -87,7 +78,16 @@ RUN ln -s /usr/share/fonts/SystemLibraryFonts/"ヒラギノ明朝 ProN.ttc" /
     ln -s /usr/share/fonts/SystemLibraryAssetsV2/com_apple_MobileAsset_Font6/00a83746b65bd0a829eba9a553e88c60b18f89d7.asset/AssetData/YuGothic-Medium.otf /usr/local/texlive/texmf-local/fonts/opentype/cjk-gs-integrate/YuGothic-Medium.otf && \
     ln -s /usr/share/fonts/SystemLibraryAssetsV2/com_apple_MobileAsset_Font6/16410f7b0c96b4bb08d952fa04d67cd65a42f1b7.asset/AssetData/YuGothic-Bold.otf /usr/local/texlive/texmf-local/fonts/opentype/cjk-gs-integrate/YuGothic-Bold.otf && \
     ln -s /usr/share/fonts/SystemLibraryAssetsV2/com_apple_MobileAsset_Font6/bdee83ea598d4a36c665b2095e0f39376e9c182b.asset/AssetData/YuMincho.ttc /usr/local/texlive/texmf-local/fonts/opentype/cjk-gs-integrate/YuMincho.ttc && \    
-    mktexlsr
+    mktexlsr && \
+    luaotfload-tool --update --force && \
+    fc-cache -r && \
+    kanji-config-updmap-sys status && \
+    # Set up latexmk and llmk
+    tlmgr install \
+      latexmk && \
+    wget -q -O /usr/local/bin/llmk https://raw.githubusercontent.com/wtsnjp/llmk/master/llmk.lua && \
+    chmod +x /usr/local/bin/llmk
+
 
 VOLUME ["/usr/local/texlive/${TL_VERSION}/texmf-var/luatex-cache"]
 
