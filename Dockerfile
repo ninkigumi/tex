@@ -2,7 +2,7 @@ FROM ubuntu:21.04
 
 LABEL maintainer="koba1014@gmail.com"
 
-ENV TL_VERSION      2021
+ENV TL_VERSION      2022
 ENV TL_PATH         /usr/local/texlive
 ENV PATH            ${TL_PATH}/bin/x86_64-linux:${TL_PATH}/bin/aarch64-linux:/bin:${PATH}
 
