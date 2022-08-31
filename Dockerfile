@@ -1,4 +1,4 @@
-FROM ubuntu:21.04
+FROM ubuntu:22.04
 
 LABEL maintainer="koba1014@gmail.com"
 
@@ -15,7 +15,7 @@ RUN apt update && \
     # Basic tools
     wget unzip ghostscript \
     # for tlmgr
-    perl-modules-5.32 \
+    # perl-modules-5.32 \
     # for XeTeX
     fontconfig && \
     # Clean caches
