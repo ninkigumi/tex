@@ -15,7 +15,7 @@ RUN apt update && \
     # Basic tools
     wget unzip ghostscript \
     # for tlmgr
-    # perl-modules-5.32 \
+    perl-modules-5.34 \
     # for XeTeX
     fontconfig && \
     # Clean caches
