@@ -12,13 +12,13 @@ WORKDIR /tmp
 RUN apt update && \
     apt upgrade -y && \
     apt install -y \
-    pip3 install pygments \
     # Basic tools
     wget unzip ghostscript \
     # for tlmgr
     perl-modules-5.34 \
     # for XeTeX
     fontconfig && \
+    pip3 install pygments && \
     # Clean caches
     apt autoremove -y && \
     apt clean && \
