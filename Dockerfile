@@ -17,7 +17,8 @@ RUN apt update && \
     # for tlmgr
     perl-modules-5.34 \
     # for XeTeX
-    fontconfig && \
+    fontconfig \
+    python3-pip && \
     pip3 install pygments && \
     # Clean caches
     apt autoremove -y && \
