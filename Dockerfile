@@ -12,6 +12,7 @@ WORKDIR /tmp
 RUN apt update && \
     apt upgrade -y && \
     apt install -y \
+    pip3 install pygments \
     # Basic tools
     wget unzip ghostscript \
     # for tlmgr
